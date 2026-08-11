@@ -14,6 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.restaurant.management.enums.UserType.CLIENT;
+import static com.restaurant.management.enums.UserType.RESTAURANT_OWNER;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse create(CreateUserRequest request) {
-        if (repository.findByEmail(request.email())) {
+        if (repository.existsByEmail(request.email())) {
             throw new EmailAlreadyExistsException(request.email());
         }
         User user = buildUser(request);
