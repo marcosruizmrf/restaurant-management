@@ -28,7 +28,7 @@ public record CreateUserRequest(
         String password,
 
         @NotNull(message = "Tipo e obrigatorio")
-        @Schema(description = "Tipo do usuario: CLIENTE ou DONO_RESTAURANTE", example = "CLIENTE")
+        @Schema(description = "Tipo do usuario: CLIENT ou RESTARANT_OWNER", example = "CLIENTE")
         UserType userType,
 
         @Valid

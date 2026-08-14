@@ -3,6 +3,9 @@ package com.restaurant.management.controller;
 import com.restaurant.management.dto.request.CreateUserRequest;
 import com.restaurant.management.dto.response.UserResponse;
 import com.restaurant.management.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@Tag(name = "Usuarios", description = "Gestao de usuarios do sistema")
+@Tag(name = "Users", description = "Gestao de usuarios do sistema")
 public class UserControllerV1 {
 
     private final UserService service;
 
     @PostMapping
+    @Operation(summary = "Criar usuario", description = "Cria um novo usuario (CLIENT ou RESTAURANT_OWNER)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Usuario criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados invalidos"),
+            @ApiResponse(responseCode = "409", description = "E-mail ja cadastrado")
+    })
     public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
