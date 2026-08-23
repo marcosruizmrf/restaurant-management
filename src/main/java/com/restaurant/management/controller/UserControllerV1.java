@@ -28,13 +28,13 @@ public class UserControllerV1 {
 
     private final UserService service;
 
-    @Operation(summary = "Criar novo usuario", description = "Cadastra um novo usuario no sistema")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Usuario criado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados de requisicao invalidos"),
-            @ApiResponse(responseCode = "409", description = "Conflito: E-mail ou login ja existente")
-    })
     @PostMapping
+    @Operation(summary = "Criar usuário", description = "Cria um novo usuário (CLIENTE ou DONO DO RESTAURANTE)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+            @ApiResponse(responseCode = "409", description = "E-mail já cadastrado")
+    })
     public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
