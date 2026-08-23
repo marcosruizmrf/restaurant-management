@@ -3,6 +3,7 @@ package com.restaurant.management.service.impl;
 import com.restaurant.management.dto.request.AddressRequest;
 import com.restaurant.management.dto.request.CreateUserRequest;
 import com.restaurant.management.dto.response.UserResponse;
+import com.restaurant.management.enums.UserType;
 import com.restaurant.management.exception.EmailAlreadyExistsException;
 import com.restaurant.management.model.Address;
 import com.restaurant.management.model.Client;
@@ -13,6 +14,8 @@ import com.restaurant.management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,26 +36,26 @@ public class UserServiceImpl implements UserService {
     private User buildUser(CreateUserRequest request) {
         Address address = toAddress(request.address());
 
-        return switch (request.userType()) {
-            case CLIENT -> Client.builder()
-                    .name(request.name())
-                    .email(request.email())
-                    .login(request.login())
-                    .password(request.password())
-                    .address(address)
-                    .build();
-            case RESTAURANT_OWNER -> RestaurantOwner.builder()
-                    .name(request.name())
-                    .email(request.email())
-                    .login(request.login())
-                    .password(request.password())
-                    .address(address)
-                    .build();
-        };
+        User.UserBuilder<?, ?> builder;
+        if (request.userType() == UserType.CLIENT) {
+            builder = Client.builder();
+        } else if (request.userType() == UserType.RESTAURANT_OWNER) {
+            builder = RestaurantOwner.builder();
+        } else {
+            throw new IllegalArgumentException("Tipo de usuario invalido: " + request.userType());
+        }
+
+        return builder
+                .name(request.name())
+                .email(request.email())
+                .login(request.login())
+                .password(request.password())
+                .address(address)
+                .build();
     }
 
     private Address toAddress(AddressRequest addressRequest) {
-        if (addressRequest == null) return null;
+        if (Objects.isNull(addressRequest)) return null;
         return new Address(addressRequest.street(), addressRequest.number(), addressRequest.city(), addressRequest.zipCode());
     }
 }

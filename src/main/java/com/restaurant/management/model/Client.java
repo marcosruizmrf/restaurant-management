@@ -16,5 +16,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class Client extends User {
 }
