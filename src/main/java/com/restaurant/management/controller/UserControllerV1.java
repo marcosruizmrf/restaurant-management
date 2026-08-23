@@ -29,11 +29,11 @@ public class UserControllerV1 {
     private final UserService service;
 
     @PostMapping
-    @Operation(summary = "Criar usuário", description = "Cria um novo usuário (CLIENTE ou DONO DO RESTAURANTE)")
+    @Operation(summary = "Criar usuario", description = "Cria um novo usuario (CLIENTE ou DONO DO RESTAURANTE)")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "409", description = "E-mail já cadastrado")
+            @ApiResponse(responseCode = "201", description = "Usuario criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados invalidos"),
+            @ApiResponse(responseCode = "409", description = "E-mail ja cadastrado")
     })
     public ResponseEntity<UserResponse> create(@RequestBody @Valid CreateUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
