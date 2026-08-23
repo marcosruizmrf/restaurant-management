@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-
 import java.util.Objects;
 
 @Service
@@ -33,6 +32,13 @@ public class UserServiceImpl implements UserService {
         }
         User user = buildUser(request);
         return UserResponse.from(repository.save(user));
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        repository.delete(user);
     }
 
     @Override

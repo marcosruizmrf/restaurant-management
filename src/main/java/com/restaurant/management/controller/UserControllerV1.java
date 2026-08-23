@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,17 @@ public class UserControllerV1 {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deletar usuário", description = "Deleta um usuário a partir do ID fornecido")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Usuário deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping
     @Operation(summary = "Listar usuários", description = "Lista os usuários que estão cadastrados no sistema")
     public ResponseEntity<List<UserResponse>> findAll(@RequestParam(required = false) String name) {
@@ -47,6 +59,9 @@ public class UserControllerV1 {
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar usuário", description = "Busca um usuário a partir do ID fornecido")
+    @ApiResponses({
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }

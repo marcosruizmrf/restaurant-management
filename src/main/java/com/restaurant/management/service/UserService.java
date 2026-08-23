@@ -8,6 +8,8 @@ public interface UserService {
 
     UserResponse create(CreateUserRequest request);
 
+    void delete(Long id);
+
     UserResponse findById(Long id);
 
     List<UserResponse> findAll(String name);
