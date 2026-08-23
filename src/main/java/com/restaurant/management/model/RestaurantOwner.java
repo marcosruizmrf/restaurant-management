@@ -3,6 +3,7 @@ package com.restaurant.management.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,5 +15,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class RestaurantOwner extends User {
 }
