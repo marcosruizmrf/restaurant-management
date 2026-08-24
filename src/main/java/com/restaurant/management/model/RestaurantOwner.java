@@ -1,6 +1,5 @@
 package com.restaurant.management.model;
 
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;

@@ -3,7 +3,7 @@ package com.restaurant.management.dto.response;
 import com.restaurant.management.model.Address;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Dados do address")
+@Schema(description = "Dados do endereço")
 public record AddressResponse(
         String street,
         String number,

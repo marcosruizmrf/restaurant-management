@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
         } else if (request.userType() == UserType.RESTAURANT_OWNER) {
             builder = RestaurantOwner.builder();
         } else {
-            throw new IllegalArgumentException("Tipo de usuario invalido: " + request.userType());
+            throw new IllegalArgumentException("Tipo de usuário inválido: " + request.userType());
         }
 
         return builder
