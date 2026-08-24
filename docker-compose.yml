@@ -10,7 +10,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -23,8 +23,8 @@ services:
 
   app:
     build:
-      context: ..
-      dockerfile: src/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     container_name: restaurant-management-app
     ports:
       - "8080:8080"
