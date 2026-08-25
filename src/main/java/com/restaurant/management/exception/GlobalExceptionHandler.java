@@ -34,6 +34,4 @@ public class GlobalExceptionHandler {
         log.error("Erro não mapeado", ex);
         return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno inesperado");
     }
-
-
 }
