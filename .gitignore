@@ -59,4 +59,3 @@ Thumbs.db
 
 # Local Docker Data #
 mysql_data/
-.idea/compiler.xml
