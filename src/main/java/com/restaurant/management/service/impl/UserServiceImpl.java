@@ -12,8 +12,8 @@ import com.restaurant.management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +28,33 @@ public class UserServiceImpl implements UserService {
         validateEmailUniqueness(request.email());
         User user = userFactory.createEntity(request);
         return UserResponse.from(repository.save(user));
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        repository.delete(user);
+    }
+
+    @Override
+    public List<UserResponse> findAll(String name) {
+        if (name != null && !name.isBlank()) {
+            return repository.findByNameContainingIgnoreCase(name)
+                    .stream()
+                    .map(UserResponse::from)
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .map(UserResponse::from)
+                .toList();
+    }
+
+    @Override
+    public UserResponse findById(Long id) {
+        User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return UserResponse.from(user);
     }
 
     @Override

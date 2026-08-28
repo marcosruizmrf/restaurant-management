@@ -2,10 +2,9 @@ package com.restaurant.management.dto.response;
 
 import com.restaurant.management.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.time.LocalDateTime;
 
-@Schema(description = "Dados de resposta do usuario")
+@Schema(description = "Dados de resposta do usuário")
 public record UserResponse(
         Long id,
         String name,
