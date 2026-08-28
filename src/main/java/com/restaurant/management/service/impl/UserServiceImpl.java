@@ -1,36 +1,32 @@
 package com.restaurant.management.service.impl;
 
-import com.restaurant.management.dto.request.AddressRequest;
 import com.restaurant.management.dto.request.CreateUserRequest;
+import com.restaurant.management.dto.request.UpdateUserRequest;
 import com.restaurant.management.dto.response.UserResponse;
-import com.restaurant.management.enums.UserType;
 import com.restaurant.management.exception.EmailAlreadyExistsException;
 import com.restaurant.management.exception.UserNotFoundException;
-import com.restaurant.management.model.Address;
-import com.restaurant.management.model.Client;
-import com.restaurant.management.model.RestaurantOwner;
+import com.restaurant.management.factory.UserFactory;
 import com.restaurant.management.model.User;
 import com.restaurant.management.repository.UserRepository;
 import com.restaurant.management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final UserFactory userFactory;
 
     @Override
     @Transactional
     public UserResponse create(CreateUserRequest request) {
-        if (repository.existsByEmail(request.email())) {
-            throw new EmailAlreadyExistsException(request.email());
-        }
-        User user = buildUser(request);
+        validateEmailUniqueness(request.email());
+        User user = userFactory.createEntity(request);
         return UserResponse.from(repository.save(user));
     }
 
@@ -61,29 +57,33 @@ public class UserServiceImpl implements UserService {
         return UserResponse.from(user);
     }
 
-    private User buildUser(CreateUserRequest request) {
-        Address address = toAddress(request.address());
+    @Override
+    @Transactional
+    public UserResponse update(Long id, UpdateUserRequest request) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
 
-        User.UserBuilder<?, ?> builder;
-        if (request.userType() == UserType.CLIENT) {
-            builder = Client.builder();
-        } else if (request.userType() == UserType.RESTAURANT_OWNER) {
-            builder = RestaurantOwner.builder();
-        } else {
-            throw new IllegalArgumentException("Tipo de usuário inválido: " + request.userType());
+        validateEmailUpdate(user.getEmail(), request.email());
+
+        user.setName(request.name());
+        user.setEmail(request.email());
+        if (request.address() != null) {
+            user.setAddress(userFactory.toAddress(request.address()));
         }
+        user.setLastChange(LocalDateTime.now());
 
-        return builder
-                .name(request.name())
-                .email(request.email())
-                .login(request.login())
-                .password(request.password())
-                .address(address)
-                .build();
+        return UserResponse.from(repository.save(user));
     }
 
-    private Address toAddress(AddressRequest addressRequest) {
-        if (Objects.isNull(addressRequest)) return null;
-        return new Address(addressRequest.street(), addressRequest.number(), addressRequest.city(), addressRequest.zipCode());
+    private void validateEmailUpdate(String currentEmail, String newEmail) {
+        if (!currentEmail.equalsIgnoreCase(newEmail)) {
+            validateEmailUniqueness(newEmail);
+        }
+    }
+
+    private void validateEmailUniqueness(String email) {
+        if (repository.existsByEmail(email)) {
+            throw new EmailAlreadyExistsException(email);
+        }
     }
 }
