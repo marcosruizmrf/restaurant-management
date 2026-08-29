@@ -1,6 +1,7 @@
 package com.restaurant.management.controller;
 
 import com.restaurant.management.dto.request.CreateUserRequest;
+import com.restaurant.management.dto.request.UpdatePasswordRequest;
 import com.restaurant.management.dto.request.UpdateUserRequest;
 import com.restaurant.management.dto.response.UserResponse;
 import com.restaurant.management.service.UserService;
@@ -108,6 +109,42 @@ public class UserControllerV1 {
             @PathVariable("id") Long id,
             @RequestBody @Valid UpdateUserRequest request) {
         return ResponseEntity.ok(service.update(id, request));
+    }
+
+    @PutMapping("/{id}/password")
+    @Operation(
+            summary = "Alterar senha",
+            description = "Altera a senha do usuário em endpoint exclusivo, distinto da atualização de dados cadastrais"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "Senha alterada com sucesso",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Senha atual inválida ou dados inválidos",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Usuário não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)
+                    )
+            )
+    })
+    public ResponseEntity<Void> updatePassword(
+            @Parameter(name = "id", description = "ID do usuário", example = "1")
+            @PathVariable("id") Long id,
+            @RequestBody @Valid UpdatePasswordRequest request) {
+        service.updatePassword(id, request);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

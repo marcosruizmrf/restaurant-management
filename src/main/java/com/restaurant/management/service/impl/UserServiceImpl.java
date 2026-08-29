@@ -1,17 +1,22 @@
 package com.restaurant.management.service.impl;
 
 import com.restaurant.management.dto.request.CreateUserRequest;
+import com.restaurant.management.dto.request.UpdatePasswordRequest;
 import com.restaurant.management.dto.request.UpdateUserRequest;
 import com.restaurant.management.dto.response.UserResponse;
 import com.restaurant.management.exception.EmailAlreadyExistsException;
+import com.restaurant.management.exception.ExceptionMessages;
+import com.restaurant.management.exception.InvalidPasswordException;
 import com.restaurant.management.exception.UserNotFoundException;
 import com.restaurant.management.factory.UserFactory;
 import com.restaurant.management.model.User;
 import com.restaurant.management.repository.UserRepository;
+import com.restaurant.management.service.PasswordService;
 import com.restaurant.management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,12 +26,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
     private final UserFactory userFactory;
+    private final PasswordService passwordService;
 
     @Override
     @Transactional
     public UserResponse create(CreateUserRequest request) {
         validateEmailUniqueness(request.email());
         User user = userFactory.createEntity(request);
+        user.setPassword(passwordService.hash(request.password()));
         return UserResponse.from(repository.save(user));
     }
 
@@ -73,6 +80,25 @@ public class UserServiceImpl implements UserService {
         user.setLastChange(LocalDateTime.now());
 
         return UserResponse.from(repository.save(user));
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(Long id, UpdatePasswordRequest request) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        if (!passwordService.matches(request.actualPassword(), user.getPassword())) {
+            throw new InvalidPasswordException(ExceptionMessages.INVALID_CURRENT_PASSWORD);
+        }
+
+        if (passwordService.matches(request.newPassword(), user.getPassword())) {
+            throw new InvalidPasswordException(ExceptionMessages.NEW_PASSWORD_SAME_AS_CURRENT);
+        }
+
+        user.setPassword(passwordService.hash(request.newPassword()));
+        user.setLastChange(LocalDateTime.now());
+        repository.save(user);
     }
 
     private void validateEmailUpdate(String currentEmail, String newEmail) {

@@ -29,8 +29,8 @@ public record CreateUserRequest(
         String login,
 
         @NotBlank(message = ExceptionMessages.PASSWORD_REQUIRED)
-        @Size(max = 255, message = ExceptionMessages.PASSWORD_MAX_LENGTH)
-        @Schema(description = "Senha de acesso", example = "senha123")
+        @Size(min = 6, max = 72, message = ExceptionMessages.PASSWORD_LENGTH)
+        @Schema(description = "Senha de acesso (mínimo 6, máximo 72 caracteres)", example = "senha123")
         String password,
 
         @NotNull(message = ExceptionMessages.TYPE_REQUIRED)
