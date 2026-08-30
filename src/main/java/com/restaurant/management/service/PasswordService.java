@@ -3,6 +3,7 @@ package com.restaurant.management.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -15,7 +16,7 @@ public class PasswordService {
     }
 
     public boolean matches(String rawPassword, String encodedPassword) {
-        if (rawPassword == null || encodedPassword == null || encodedPassword.isBlank()) {
+        if (!StringUtils.hasText(rawPassword) || !StringUtils.hasText(encodedPassword)) {
             return false;
         }
         try {
