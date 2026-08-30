@@ -19,7 +19,6 @@ public class UserFactory {
         user.setName(request.name());
         user.setEmail(request.email());
         user.setLogin(request.login());
-        user.setPassword(request.password());
         user.setLastChange(LocalDateTime.now());
 
         if (request.address() != null) {

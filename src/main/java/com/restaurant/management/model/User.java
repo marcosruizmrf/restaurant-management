@@ -45,7 +45,8 @@ public abstract class User {
     @Column(nullable = false, unique = true)
     private String login;
 
-    @Column(nullable = false)
+    /** Hash BCrypt (60 caracteres). Nunca armazenar senha em texto puro. */
+    @Column(nullable = false, length = 60)
     private String password;
 
     @Column(name = "last_change")
