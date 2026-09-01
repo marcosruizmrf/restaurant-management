@@ -101,10 +101,22 @@ src/main/java/com/restaurant/management/
 
 ## 🔌 7. Endpoints da API REST
 
+### 🔑 Autenticação (`AuthControllerV1`)
+
+| Método | Endpoint | Descrição | Status HTTP |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/v1/auth/login` | Valida credenciais de login e senha no banco de dados | `200 OK` / `400 Bad Request` |
+
+### 👤 Usuários (`UserControllerV1`)
+
 | Método | Endpoint | Descrição | Status HTTP |
 | :--- | :--- | :--- | :--- |
 | `POST` | `/api/v1/users` | Cadastro polimórfico de novo usuário (`CLIENT` ou `RESTAURANT_OWNER`) | `201 Created` / `400` / `409` |
-| `PUT` | `/api/v1/users/{id}` | Atualização dos dados cadastrais e endereço de um usuário existente | `200 OK` / `404` / `409` |
+| `GET` | `/api/v1/users` | Lista usuários cadastrados (com filtro opcional por nome `?name=...`) | `200 OK` |
+| `GET` | `/api/v1/users/{id}` | Busca os detalhes de um usuário específico por ID | `200 OK` / `404 Not Found` |
+| `PUT` | `/api/v1/users/{id}` | Atualização de dados cadastrais e endereço de um usuário | `200 OK` / `400` / `404` / `409` |
+| `PUT` | `/api/v1/users/{id}/password` | Alterar senha do usuário em endpoint exclusivo | `204 No Content` / `400` / `404` |
+| `DELETE` | `/api/v1/users/{id}` | Deleta um usuário do sistema a partir do ID | `204 No Content` / `404 Not Found` |
 
 ### Tratamento Global de Exceções (`GlobalExceptionHandler`)
 A aplicação utiliza `@RestControllerAdvice(basePackages = "com.restaurant.management")` para padronizar respostas de erro no formato RFC 7807:
