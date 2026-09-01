@@ -1,10 +1,10 @@
 package com.restaurant.management.dto.request;
 
+import com.restaurant.management.exception.ExceptionMessages;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import com.restaurant.management.exception.ExceptionMessages;
 
 @Schema(description = "Dados para atualização das informações do usuário (exceto senha)")
 public record UpdateUserRequest(
@@ -15,7 +15,7 @@ public record UpdateUserRequest(
 
         @Email(message = ExceptionMessages.EMAIL_INVALID)
         @NotBlank(message = ExceptionMessages.EMAIL_REQUIRED)
-        @Schema(description = "E-mail único do usuario", example = "joao.novo@email.com")
+        @Schema(description = "E-mail único do usuário", example = "joao.novo@email.com")
         String email,
 
         @Valid

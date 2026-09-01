@@ -7,6 +7,7 @@ import com.restaurant.management.dto.response.UserResponse;
 import com.restaurant.management.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -68,6 +69,7 @@ public class UserControllerV1 {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
+    @PutMapping("/{id}")
     @Operation(summary = "Atualizar usuário", description = "Atualiza os dados de um usuário existente pelo seu ID")
     @ApiResponses({
             @ApiResponse(
@@ -103,9 +105,8 @@ public class UserControllerV1 {
                     )
             )
     })
-    @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(
-            @Parameter(name = "id", description = "ID do usuario a ser atualizado", example = "1")
+            @Parameter(name = "id", description = "ID do usuário a ser atualizado", example = "1")
             @PathVariable("id") Long id,
             @RequestBody @Valid UpdateUserRequest request) {
         return ResponseEntity.ok(service.update(id, request));
@@ -162,16 +163,30 @@ public class UserControllerV1 {
                             mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)
                     )
-            ),
+            )
     })
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(
+            @Parameter(name = "id", description = "ID do usuário a ser deletado", example = "1")
+            @PathVariable("id") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     @Operation(summary = "Listar usuários", description = "Lista os usuários que estão cadastrados no sistema")
-    public ResponseEntity<List<UserResponse>> findAll(@RequestParam(required = false) String name) {
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lista retornada com sucesso",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserResponse.class))
+                    )
+            )
+    })
+    public ResponseEntity<List<UserResponse>> findAll(
+            @Parameter(description = "Filtrar por nome", example = "João")
+            @RequestParam(required = false) String name) {
         return ResponseEntity.ok(service.findAll(name));
     }
 
@@ -179,15 +194,25 @@ public class UserControllerV1 {
     @Operation(summary = "Buscar usuário", description = "Busca um usuário a partir do ID fornecido")
     @ApiResponses({
             @ApiResponse(
+                    responseCode = "200",
+                    description = "Usuário encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponse.class)
+                    )
+            ),
+            @ApiResponse(
                     responseCode = "404",
                     description = "Usuário não encontrado",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)
                     )
-            ),
+            )
     })
-    public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> findById(
+            @Parameter(name = "id", description = "ID do usuário", example = "1")
+            @PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 }
