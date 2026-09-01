@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.restaurant</groupId>
 	<artifactId>management</artifactId>
@@ -24,6 +24,21 @@
 			<id>marcosruizfreire</id>
 			<name>Marcos Ruiz Freire</name>
 			<email>marcosruizfreire@gmail.com</email>
+		</developer>
+		<developer>
+			<id>jbernardinojr</id>
+			<name>José Bernardino da Silva Júnior</name>
+			<email>jbernardino.jr@gmail.com</email>
+		</developer>
+		<developer>
+			<id>lucasgbrisolla</id>
+			<name>Lucas Brisolla</name>
+			<email>lucasgbrisolla@gmail.com</email>
+		</developer>
+		<developer>
+			<id>rodrfit</id>
+			<name>Rodrigo Fittipaldi</name>
+			<email>rodrfit@gmail.com</email>
 		</developer>
 	</developers>
 	<properties>
