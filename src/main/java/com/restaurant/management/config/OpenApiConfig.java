@@ -14,9 +14,9 @@ public class OpenApiConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Sistema de Gestao de Restaurantes")
+                        .title("Sistema de Gestão de Restaurantes")
                         .description("API para gerenciamento de usuários - FIAP Postech Tech Challenge Fase 1. "
-                                + "Suporta dois tipos de usuário: CLIENTE e DONO_RESTAURANTE.")
+                                + "Suporta dois tipos de usuário: CLIENT e RESTAURANT_OWNER.")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0").url("https://github.com/marcosruizmrf/restaurant-management"))
                         .contact(new Contact()

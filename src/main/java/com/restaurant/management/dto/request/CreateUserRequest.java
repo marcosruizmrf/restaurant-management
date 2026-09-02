@@ -1,37 +1,43 @@
 package com.restaurant.management.dto.request;
 
 import com.restaurant.management.enums.UserType;
+import com.restaurant.management.exception.ExceptionMessages;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-@Schema(description = "Dados para criacao de um novo usuario")
+@Schema(description = "Dados para criação de um novo usuário")
 public record CreateUserRequest(
 
-        @NotBlank(message = "Nome e obrigatorio")
-        @Schema(description = "Nome completo", example = "Joao Silva")
+        @NotBlank(message = ExceptionMessages.NAME_REQUIRED)
+        @Size(max = 255, message = ExceptionMessages.NAME_MAX_LENGTH)
+        @Schema(description = "Nome completo", example = "João Silva")
         String name,
 
-        @Email(message = "E-mail invalido")
-        @NotBlank(message = "E-mail e obrigatorio")
-        @Schema(description = "E-mail unico do usuario", example = "joao@email.com")
+        @Email(message = ExceptionMessages.EMAIL_INVALID)
+        @NotBlank(message = ExceptionMessages.EMAIL_REQUIRED)
+        @Size(max = 255, message = ExceptionMessages.EMAIL_MAX_LENGTH)
+        @Schema(description = "E-mail único do usuário", example = "joao.novo@email.com")
         String email,
 
-        @NotBlank(message = "Login e obrigatorio")
+        @NotBlank(message = ExceptionMessages.LOGIN_REQUIRED)
+        @Size(max = 255, message = ExceptionMessages.LOGIN_MAX_LENGTH)
         @Schema(description = "Login de acesso", example = "joaosilva")
         String login,
 
-        @NotBlank(message = "Senha e obrigatoria")
-        @Schema(description = "Senha de acesso", example = "senha123")
+        @NotBlank(message = ExceptionMessages.PASSWORD_REQUIRED)
+        @Size(min = 6, max = 72, message = ExceptionMessages.PASSWORD_LENGTH)
+        @Schema(description = "Senha de acesso (mínimo 6, máximo 72 caracteres)", example = "senha123")
         String password,
 
-        @NotNull(message = "Tipo e obrigatorio")
-        @Schema(description = "Tipo do usuario: CLIENTE ou DONO_RESTAURANTE", example = "CLIENTE")
+        @NotNull(message = ExceptionMessages.TYPE_REQUIRED)
+        @Schema(description = "Tipo do usuário", example = "CLIENT", allowableValues = {"CLIENT", "RESTAURANT_OWNER"})
         UserType userType,
 
         @Valid
-        @Schema(description = "Endereco do usuario")
+        @Schema(description = "Endereço do usuário")
         AddressRequest address
 ) {}

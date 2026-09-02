@@ -1,23 +1,39 @@
 package com.restaurant.management.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import lombok.Data;
-
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@Data
-public class User {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "users_type", discriminatorType = DiscriminatorType.STRING)
+@Getter
+@Setter
+@NoArgsConstructor
+@SuperBuilder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(nullable = false)
@@ -29,7 +45,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String login;
 
-    @Column(nullable = false)
+    /** Hash BCrypt (60 caracteres). Nunca armazenar senha em texto puro. */
+    @Column(nullable = false, length = 60)
     private String password;
 
     @Column(name = "last_change")
@@ -37,5 +54,11 @@ public class User {
 
     @Embedded
     private Address address;
+
+    @PrePersist
+    @PreUpdate
+    private void updateLastChange() {
+        lastChange = LocalDateTime.now();
+    }
 
 }
