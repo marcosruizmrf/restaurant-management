@@ -1,8 +1,6 @@
 package com.restaurant.management.dto.response;
 
 // MenuItemResponse.java
-package management.dto.response;
-
 public record MenuItemResponse(
         Long id,
         String nome,

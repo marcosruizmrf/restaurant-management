@@ -1,4 +1,4 @@
-{{
+{
   "info": {
     "name": "Restaurant Management - Fase 2",
     "description": "Collection de testes para CRUD de UserType, Restaurant e MenuItem",

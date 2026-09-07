@@ -1,7 +1,6 @@
 package com.restaurant.management.dto.request;
 
 // CreateMenuItemRequest.java
-package management.dto.request;
 
 public record CreateMenuItemRequest(
         String nome,
