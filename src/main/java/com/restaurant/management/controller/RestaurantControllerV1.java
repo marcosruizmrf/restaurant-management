@@ -1,11 +1,18 @@
 package com.restaurant.management.controller;
 
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+import com.restaurant.management.service.RestaurantService;
+import com.restaurant.management.dto.request.CreateRestaurantRequest;
+import com.restaurant.management.dto.response.RestaurantResponse;
+
 @RestController
 @RequestMapping("/api/v1/restaurants")
-public class RestaurantController {
+public class RestaurantControllerV1 {
     private final RestaurantService service;
 
-    public RestaurantController(RestaurantService service) {
+    public RestaurantControllerV1(RestaurantService service) {
         this.service = service;
     }
 
