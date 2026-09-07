@@ -96,6 +96,6 @@ class RestaurantControllerTest {
     @Test
     void testDeleteRestaurant() throws Exception {
         mockMvc.perform(delete("/api/v1/restaurants/30"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 }

@@ -1,6 +1,7 @@
 package com.restaurant.management.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 import com.restaurant.management.service.RestaurantService;
@@ -37,8 +38,9 @@ public class RestaurantControllerV1 {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
