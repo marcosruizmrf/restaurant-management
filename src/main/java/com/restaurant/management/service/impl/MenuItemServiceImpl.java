@@ -1,15 +1,12 @@
 package com.restaurant.management.service.impl;
 
-package management.service.impl;
-
-import management.dto.request.CreateMenuItemRequest;
-import management.dto.response.MenuItemResponse;
-import management.exception.UserNotFoundException;
-import management.model.MenuItem;
-import management.model.Restaurant;
-import management.repository.MenuItemRepository;
-import management.repository.RestaurantRepository;
-import management.service.MenuItemService;
+import com.restaurant.management.dto.request.CreateMenuItemRequest;
+import com.restaurant.management.dto.response.MenuItemResponse;
+import com.restaurant.management.model.MenuItem;
+import com.restaurant.management.model.Restaurant;
+import com.restaurant.management.repository.MenuItemRepository;
+import com.restaurant.management.repository.RestaurantRepository;
+import com.restaurant.management.service.MenuItemService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
