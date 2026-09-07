@@ -1,0 +1,45 @@
+package com.restaurant.management.service.impl;
+
+package management.service.impl;
+
+import management.dto.request.CreateRestaurantRequest;
+import management.model.Restaurant;
+import management.model.User;
+import management.repository.RestaurantRepository;
+import management.repository.UserRepository;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+
+class RestaurantServiceImplTest {
+
+    private final RestaurantRepository restaurantRepository = Mockito.mock(RestaurantRepository.class);
+    private final UserRepository userRepository = Mockito.mock(UserRepository.class);
+    private final RestaurantServiceImpl service = new RestaurantServiceImpl(restaurantRepository, userRepository);
+
+    @Test
+    void testCreateRestaurant() {
+        User owner = new User();
+        owner.setId(5L);
+
+        Mockito.when(userRepository.findById(5L)).thenReturn(Optional.of(owner));
+        Mockito.when(restaurantRepository.save(any(Restaurant.class))).thenAnswer(invocation -> {
+            Restaurant r = invocation.getArgument(0);
+            r.setId(100L);
+            return r;
+        });
+
+        CreateRestaurantRequest request = new CreateRestaurantRequest(
+                "Restaurante Central", "Rua A, 123", "Italiana", "10h-22h", 5L);
+
+        var response = service.create(request);
+
+        assertEquals("Restaurante Central", response.nome());
+        assertEquals(100L, response.id());
+        assertEquals(5L, response.ownerId());
+    }
+}
