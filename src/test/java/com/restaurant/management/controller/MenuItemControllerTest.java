@@ -1,11 +1,10 @@
 package com.restaurant.management.controller;
 
-package management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import management.dto.request.CreateMenuItemRequest;
-import management.dto.response.MenuItemResponse;
-import management.service.MenuItemService;
+import com.restaurant.management.dto.request.CreateMenuItemRequest;
+import com.restaurant.management.dto.response.MenuItemResponse;
+import com.restaurant.management.service.MenuItemService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(MenuItemController.class)
+@WebMvcTest(MenuItemControllerV1.class)
 class MenuItemControllerTest {
 
     @Autowired
@@ -43,7 +42,7 @@ class MenuItemControllerTest {
 
         Mockito.when(service.create(any(CreateMenuItemRequest.class))).thenReturn(response);
 
-        mockMvc.perform(post("/api/menu-items")
+        mockMvc.perform(post("/api/v1/menu-items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -58,7 +57,7 @@ class MenuItemControllerTest {
 
         Mockito.when(service.findAll()).thenReturn(List.of(i1, i2));
 
-        mockMvc.perform(get("/api/menu-items"))
+        mockMvc.perform(get("/api/v1/menu-items"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].nome").value("Pizza"))
                 .andExpect(jsonPath("$[1].nome").value("Hamburguer"));
@@ -71,7 +70,7 @@ class MenuItemControllerTest {
 
         Mockito.when(service.findById(5L)).thenReturn(response);
 
-        mockMvc.perform(get("/api/menu-items/5"))
+        mockMvc.perform(get("/api/v1/menu-items/5"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(5L))
                 .andExpect(jsonPath("$.nome").value("Sushi"));
@@ -87,7 +86,7 @@ class MenuItemControllerTest {
 
         Mockito.when(service.update(eq(15L), any(CreateMenuItemRequest.class))).thenReturn(response);
 
-        mockMvc.perform(put("/api/menu-items/15")
+        mockMvc.perform(put("/api/v1/menu-items/15")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -97,7 +96,7 @@ class MenuItemControllerTest {
 
     @Test
     void testDeleteMenuItem() throws Exception {
-        mockMvc.perform(delete("/api/menu-items/20"))
+        mockMvc.perform(delete("/api/v1/menu-items/20"))
                 .andExpect(status().isNoContent());
     }
 }
