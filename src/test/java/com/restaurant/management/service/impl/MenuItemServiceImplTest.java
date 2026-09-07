@@ -1,12 +1,10 @@
 package com.restaurant.management.service.impl;
 
-package management.service.impl;
-
-import management.dto.request.CreateMenuItemRequest;
-import management.model.MenuItem;
-import management.model.Restaurant;
-import management.repository.MenuItemRepository;
-import management.repository.RestaurantRepository;
+import com.restaurant.management.dto.request.CreateMenuItemRequest;
+import com.restaurant.management.model.MenuItem;
+import com.restaurant.management.model.Restaurant;
+import com.restaurant.management.repository.MenuItemRepository;
+import com.restaurant.management.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

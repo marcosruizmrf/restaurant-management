@@ -1,12 +1,10 @@
 package com.restaurant.management.service.impl;
 
-package management.service.impl;
-
-import management.dto.request.CreateRestaurantRequest;
-import management.model.Restaurant;
-import management.model.User;
-import management.repository.RestaurantRepository;
-import management.repository.UserRepository;
+import com.restaurant.management.dto.request.CreateRestaurantRequest;
+import com.restaurant.management.model.Restaurant;
+import com.restaurant.management.model.User;
+import com.restaurant.management.repository.RestaurantRepository;
+import com.restaurant.management.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
