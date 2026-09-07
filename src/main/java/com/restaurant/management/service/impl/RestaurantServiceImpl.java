@@ -1,5 +1,15 @@
 package com.restaurant.management.service.impl;
 
+import org.springframework.stereotype.Service;
+import com.restaurant.management.service.RestaurantService;
+import com.restaurant.management.repository.RestaurantRepository;
+import com.restaurant.management.repository.UserRepository;
+import com.restaurant.management.dto.request.CreateRestaurantRequest;
+import com.restaurant.management.dto.response.RestaurantResponse;
+import com.restaurant.management.model.Restaurant;
+import com.restaurant.management.model.User;
+import com.restaurant.management.exception.UserNotFoundException;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository repository;
