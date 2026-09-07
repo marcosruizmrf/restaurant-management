@@ -1,10 +1,8 @@
 package com.restaurant.management.controller;
 
-package management.controller;
-
-import management.dto.request.CreateMenuItemRequest;
-import management.dto.response.MenuItemResponse;
-import management.service.MenuItemService;
+import com.restaurant.management.dto.request.CreateMenuItemRequest;
+import com.restaurant.management.dto.response.MenuItemResponse;
+import com.restaurant.management.service.MenuItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/menu-items")
-public class MenuItemController {
+public class MenuItemControllerV1 {
 
     private final MenuItemService service;
 
-    public MenuItemController(MenuItemService service) {
+    public MenuItemControllerV1(MenuItemService service) {
         this.service = service;
     }
 
