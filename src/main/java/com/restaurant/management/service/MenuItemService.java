@@ -1,9 +1,7 @@
 package com.restaurant.management.service;
 
-package management.service;
-
-import management.dto.request.CreateMenuItemRequest;
-import management.dto.response.MenuItemResponse;
+import com.restaurant.management.dto.request.CreateMenuItemRequest;
+import com.restaurant.management.dto.response.MenuItemResponse;
 
 import java.util.List;
 
