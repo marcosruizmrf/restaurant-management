@@ -148,6 +148,34 @@ public class UserControllerV1 {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}/type/{typeId}")
+    @Operation(summary = "Associar tipo de usuário", description = "Associa um tipo de usuário existente ao usuário informado")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Tipo de usuário associado com sucesso",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Usuário ou tipo de usuário não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)
+                    )
+            )
+    })
+    public ResponseEntity<UserResponse> assignType(
+            @Parameter(name = "id", description = "ID do usuário", example = "1")
+            @PathVariable("id") Long id,
+            @Parameter(name = "typeId", description = "ID do tipo de usuário", example = "1")
+            @PathVariable("typeId") Long typeId) {
+        return ResponseEntity.ok(service.assignType(id, typeId));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar usuário", description = "Deleta um usuário a partir do ID fornecido")
     @ApiResponses({

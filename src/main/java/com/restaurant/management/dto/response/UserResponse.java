@@ -20,7 +20,7 @@ public record UserResponse(
                 user.getName(),
                 user.getEmail(),
                 user.getLogin(),
-                user.getClass().getSimpleName(),
+                user.getUserType() != null ? user.getUserType().getName() : user.getClass().getSimpleName(),
                 user.getLastChange(),
                 AddressResponse.from(user.getAddress())
         );

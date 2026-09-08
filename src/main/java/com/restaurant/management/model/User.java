@@ -5,11 +5,14 @@ import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -54,6 +57,10 @@ public abstract class User {
 
     @Embedded
     private Address address;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_type_id")
+    private UserType userType;
 
     @PrePersist
     @PreUpdate

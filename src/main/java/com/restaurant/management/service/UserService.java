@@ -18,5 +18,7 @@ public interface UserService {
 
     UserResponse findById(Long id);
 
+    UserResponse assignType(Long userId, Long userTypeId);
+
     List<UserResponse> findAll(String name);
 }

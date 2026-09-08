@@ -8,9 +8,12 @@ import com.restaurant.management.exception.EmailAlreadyExistsException;
 import com.restaurant.management.exception.ExceptionMessages;
 import com.restaurant.management.exception.InvalidPasswordException;
 import com.restaurant.management.exception.UserNotFoundException;
+import com.restaurant.management.exception.UserTypeNotFoundException;
 import com.restaurant.management.factory.UserFactory;
 import com.restaurant.management.model.User;
+import com.restaurant.management.model.UserType;
 import com.restaurant.management.repository.UserRepository;
+import com.restaurant.management.repository.UserTypeRepository;
 import com.restaurant.management.service.PasswordService;
 import com.restaurant.management.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final UserFactory userFactory;
     private final PasswordService passwordService;
+    private final UserTypeRepository userTypeRepository;
 
     @Override
     @Transactional
@@ -62,6 +66,19 @@ public class UserServiceImpl implements UserService {
     public UserResponse findById(Long id) {
         User user = repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return UserResponse.from(user);
+    }
+
+    @Override
+    @Transactional
+    public UserResponse assignType(Long userId, Long userTypeId) {
+        User user = repository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        UserType userType = userTypeRepository.findById(userTypeId)
+                .orElseThrow(() -> new UserTypeNotFoundException(userTypeId));
+
+        user.setUserType(userType);
+        user.setLastChange(LocalDateTime.now());
+        return UserResponse.from(repository.save(user));
     }
 
     @Override

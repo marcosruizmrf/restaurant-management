@@ -27,6 +27,16 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
+    @ExceptionHandler(UserTypeNotFoundException.class)
+    public ProblemDetail handleUserTypeNotFound(UserTypeNotFoundException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(UserTypeAlreadyExistsException.class)
+    public ProblemDetail handleUserTypeAlreadyExists(UserTypeAlreadyExistsException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
     @ExceptionHandler(InvalidPasswordException.class)
     public ProblemDetail handleInvalidPassword(InvalidPasswordException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
