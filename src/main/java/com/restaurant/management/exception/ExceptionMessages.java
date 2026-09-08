@@ -7,6 +7,27 @@ public final class ExceptionMessages {
     public static final String NAME_REQUIRED = "Nome é obrigatório";
     public static final String NAME_MAX_LENGTH = "Nome deve ter no máximo 255 caracteres";
 
+    public static final String ADDRESS_REQUIRED = "Endereço é obrigatório";
+    public static final String ADDRESS_MAX_LENGTH = "Endereço deve ter no máximo 255 caracteres";
+
+    public static final String CUISINE_REQUIRED = "Tipo de cozinha é obrigatório";
+    public static final String CUISINE_MAX_LENGTH = "Tipo de cozinha deve ter no máximo 255 caracteres";
+
+    public static final String OPENING_HOURS_REQUIRED = "Horário de funcionamento é obrigatório";
+    public static final String OPENING_HOURS_MAX_LENGTH = "Horário de funcionamento deve ter no máximo 255 caracteres";
+
+    public static final String OWNER_ID_REQUIRED = "ID do proprietário é obrigatório";
+
+    public static final String DESCRIPTION_REQUIRED = "Descrição é obrigatória";
+    public static final String DESCRIPTION_MAX_LENGTH = "Descrição deve ter no máximo 1000 caracteres";
+
+    public static final String PRICE_REQUIRED = "Preço é obrigatório";
+    public static final String PRICE_GREATER_THAN_ZERO = "Preço deve ser maior que zero";
+
+    public static final String AVAILABILITY_REQUIRED = "Disponibilidade no local é obrigatória";
+    public static final String PHOTO_PATH_MAX_LENGTH = "Caminho da foto deve ter no máximo 255 caracteres";
+    public static final String RESTAURANT_ID_REQUIRED = "ID do restaurante é obrigatório";
+
     public static final String EMAIL_INVALID = "E-mail inválido";
     public static final String EMAIL_REQUIRED = "E-mail é obrigatório";
     public static final String EMAIL_MAX_LENGTH = "E-mail deve ter no máximo 255 caracteres";
