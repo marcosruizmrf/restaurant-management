@@ -1,5 +1,6 @@
 package com.restaurant.management.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.management.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,7 +13,9 @@ public record UserResponse(
         String name,
         String email,
         String login,
-        String userType,
+        @JsonProperty("tipo_usuario")
+        @JsonAlias({"userType"})
+        String tipoUsuario,
         @JsonProperty("id_tipo_usuario")
         Long idTipoUsuario,
         @JsonProperty("descricao_tipo_usuario")

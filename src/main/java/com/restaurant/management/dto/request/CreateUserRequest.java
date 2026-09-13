@@ -1,5 +1,7 @@
 package com.restaurant.management.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.management.enums.UserType;
 import com.restaurant.management.exception.ExceptionMessages;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -34,6 +36,8 @@ public record CreateUserRequest(
         String password,
 
         @NotNull(message = ExceptionMessages.TYPE_REQUIRED)
+        @JsonProperty("tipo_usuario")
+        @JsonAlias({"userType"})
         @Schema(description = "Tipo do usuário", example = "CLIENT", allowableValues = {"CLIENT", "RESTAURANT_OWNER"})
         UserType userType,
 
