@@ -12,7 +12,12 @@
       "type": "string"
     },
     {
-      "key": "userId",
+      "key": "id_usuario",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "id_tipo_usuario",
       "value": "1",
       "type": "string"
     },
@@ -136,7 +141,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "raw": "{{baseUrl}}/api/v1/users/{{id_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -144,7 +149,7 @@
                 "api",
                 "v1",
                 "users",
-                "{{userId}}"
+                "{{id_usuario}}"
               ]
             }
           },
@@ -171,7 +176,7 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "raw": "{{baseUrl}}/api/v1/users/{{id_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -179,7 +184,7 @@
                 "api",
                 "v1",
                 "users",
-                "{{userId}}"
+                "{{id_usuario}}"
               ]
             }
           },
@@ -206,7 +211,7 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/password",
+              "raw": "{{baseUrl}}/api/v1/users/{{id_usuario}}/password",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -214,7 +219,7 @@
                 "api",
                 "v1",
                 "users",
-                "{{userId}}",
+                "{{id_usuario}}",
                 "password"
               ]
             }
@@ -227,7 +232,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "raw": "{{baseUrl}}/api/v1/users/{{id_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -235,7 +240,7 @@
                 "api",
                 "v1",
                 "users",
-                "{{userId}}"
+                "{{id_usuario}}"
               ]
             }
           },
@@ -305,7 +310,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/user-types/1",
+              "raw": "{{baseUrl}}/api/v1/user-types/{{id_tipo_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -313,7 +318,7 @@
                 "api",
                 "v1",
                 "user-types",
-                "1"
+                "{{id_tipo_usuario}}"
               ]
             }
           },
@@ -340,7 +345,7 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/v1/user-types/1",
+              "raw": "{{baseUrl}}/api/v1/user-types/{{id_tipo_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -348,7 +353,7 @@
                 "api",
                 "v1",
                 "user-types",
-                "1"
+                "{{id_tipo_usuario}}"
               ]
             }
           },
@@ -360,7 +365,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/user-types/1",
+              "raw": "{{baseUrl}}/api/v1/user-types/{{id_tipo_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -368,7 +373,7 @@
                 "api",
                 "v1",
                 "user-types",
-                "1"
+                "{{id_tipo_usuario}}"
               ]
             }
           },
@@ -380,7 +385,7 @@
             "method": "PUT",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/type/1",
+              "raw": "{{baseUrl}}/api/v1/users/{{id_usuario}}/type/{{id_tipo_usuario}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -388,9 +393,9 @@
                 "api",
                 "v1",
                 "users",
-                "{{userId}}",
+                "{{id_usuario}}",
                 "type",
-                "1"
+                "{{id_tipo_usuario}}"
               ]
             }
           },

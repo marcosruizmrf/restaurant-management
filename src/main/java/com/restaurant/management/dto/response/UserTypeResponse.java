@@ -1,11 +1,13 @@
 package com.restaurant.management.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.management.model.UserType;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Dados de resposta do tipo de usuário")
 public record UserTypeResponse(
 
+        @JsonProperty("id_tipo_usuario")
         @Schema(description = "ID do tipo de usuário", example = "1")
         Long id,
 

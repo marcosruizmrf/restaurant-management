@@ -1,11 +1,13 @@
 package com.restaurant.management.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.management.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 @Schema(description = "Dados de resposta do usuário")
 public record UserResponse(
+        @JsonProperty("id_usuario")
         Long id,
         String name,
         String email,
