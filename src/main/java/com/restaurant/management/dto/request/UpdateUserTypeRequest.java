@@ -11,5 +11,9 @@ public record UpdateUserTypeRequest(
         @NotBlank(message = ExceptionMessages.USER_TYPE_NAME_REQUIRED)
         @Size(max = 255, message = ExceptionMessages.USER_TYPE_NAME_MAX_LENGTH)
         @Schema(description = "Nome do tipo de usuário", example = "Cliente Premium")
-        String name
+        String name,
+
+        @Size(max = 1000, message = ExceptionMessages.USER_TYPE_OBSERVATION_MAX_LENGTH)
+        @Schema(description = "Observação do tipo de usuário", example = "Usuário com acesso administrativo para gerenciar restaurantes")
+        String observation
 ) {}

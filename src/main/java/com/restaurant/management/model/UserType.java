@@ -27,4 +27,7 @@ public class UserType {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @Column(length = 1000)
+    private String observation;
 }

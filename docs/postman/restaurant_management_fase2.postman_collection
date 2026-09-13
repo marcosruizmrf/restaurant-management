@@ -16,7 +16,7 @@
             "url": { "raw": "http://localhost:8080/api/user-types" },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nome\": \"Cliente\",\n  \"observacao\": \"Usuário comum que faz pedidos\"\n}"
+              "raw": "{\n  \"name\": \"Cliente\",\n  \"observation\": \"Usuário que realiza pedidos no sistema\"\n}"
             }
           }
         },
@@ -36,7 +36,7 @@
             "url": { "raw": "http://localhost:8080/api/user-types/1" },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nome\": \"Dono de Restaurante\",\n  \"observacao\": \"Usuário responsável pelo restaurante\"\n}"
+              "raw": "{\n  \"name\": \"Dono de Restaurante\",\n  \"observation\": \"Usuário responsável pelo restaurante\"\n}"
             }
           }
         },

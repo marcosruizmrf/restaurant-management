@@ -259,7 +259,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Cliente\"\n}",
+              "raw": "{\n  \"name\": \"Cliente\",\n  \"observation\": \"Usuário que realiza pedidos no sistema\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -332,7 +332,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Cliente Premium\"\n}",
+              "raw": "{\n  \"name\": \"Cliente Premium\",\n  \"observation\": \"Usuário com acesso administrativo para gerenciar restaurantes\"\n}",
               "options": {
                 "raw": {
                   "language": "json"

@@ -30,6 +30,7 @@ public class UserTypeServiceImpl implements UserTypeService {
 
         UserType userType = new UserType();
         userType.setName(normalizedName);
+        userType.setObservation(request.observation() != null ? request.observation().trim() : null);
         return UserTypeResponse.from(repository.save(userType));
     }
 
@@ -46,6 +47,7 @@ public class UserTypeServiceImpl implements UserTypeService {
         }
 
         userType.setName(normalizedName);
+        userType.setObservation(request.observation() != null ? request.observation().trim() : null);
         return UserTypeResponse.from(repository.save(userType));
     }
 

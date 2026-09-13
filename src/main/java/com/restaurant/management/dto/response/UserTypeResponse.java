@@ -10,10 +10,13 @@ public record UserTypeResponse(
         Long id,
 
         @Schema(description = "Nome do tipo de usuário", example = "Cliente")
-        String name
+        String name,
+
+        @Schema(description = "Observação do tipo de usuário", example = "Usuário que realiza pedidos no sistema")
+        String observation
 ) {
     public static UserTypeResponse from(UserType userType) {
         if (userType == null) return null;
-        return new UserTypeResponse(userType.getId(), userType.getName());
+        return new UserTypeResponse(userType.getId(), userType.getName(), userType.getObservation());
     }
 }

@@ -42,6 +42,7 @@ public final class ExceptionMessages {
 
     public static final String USER_TYPE_NAME_REQUIRED = "Nome do tipo de usuário é obrigatório";
     public static final String USER_TYPE_NAME_MAX_LENGTH = "Nome do tipo de usuário deve ter no máximo 255 caracteres";
+    public static final String USER_TYPE_OBSERVATION_MAX_LENGTH = "Observação do tipo de usuário deve ter no máximo 1000 caracteres";
 
     public static final String CURRENT_PASSWORD_REQUIRED = "Senha atual é obrigatória";
     public static final String NEW_PASSWORD_REQUIRED = "Nova senha é obrigatória";
