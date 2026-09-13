@@ -89,7 +89,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@email.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"tipo_usuario\": \"CLIENT\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"zipCode\": \"01310-100\"\n  }\n}",
+              "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@email.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"id_tipo_usuario\": 1,\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"city\": \"São Paulo\",\n    \"zipCode\": \"01310-100\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -168,7 +168,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.atualizado@email.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"tipo_usuario\": \"CLIENT\",\n  \"address\": {\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"456\",\n    \"city\": \"São Paulo\",\n    \"zipCode\": \"01311-000\"\n  }\n}",
+              "raw": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.atualizado@email.com\",\n  \"login\": \"joaosilva\",\n  \"password\": \"senha123\",\n  \"id_tipo_usuario\": 1,\n  \"address\": {\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"456\",\n    \"city\": \"São Paulo\",\n    \"zipCode\": \"01311-000\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"

@@ -1,6 +1,6 @@
 package com.restaurant.management.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.management.enums.UserType;
 import com.restaurant.management.exception.ExceptionMessages;
@@ -35,13 +35,21 @@ public record CreateUserRequest(
         @Schema(description = "Senha de acesso (mínimo 6, máximo 72 caracteres)", example = "senha123")
         String password,
 
-        @NotNull(message = ExceptionMessages.TYPE_REQUIRED)
-        @JsonProperty("tipo_usuario")
-        @JsonAlias({"userType"})
-        @Schema(description = "Tipo do usuário", example = "CLIENT", allowableValues = {"CLIENT", "RESTAURANT_OWNER"})
+        @JsonIgnore
+        @Schema(description = "Tipo do usuário (mantido apenas para compatibilidade interna)", example = "CLIENT", allowableValues = {"CLIENT", "RESTAURANT_OWNER"})
         UserType userType,
+
+        @NotNull(message = ExceptionMessages.TYPE_REQUIRED)
+        @JsonProperty("id_tipo_usuario")
+        @Schema(description = "ID do tipo de usuário associado ao cadastro", example = "1")
+        Long idTipoUsuario,
 
         @Valid
         @Schema(description = "Endereço do usuário")
         AddressRequest address
-) {}
+) {
+
+    public CreateUserRequest(String name, String email, String login, String password, UserType userType, AddressRequest address) {
+        this(name, email, login, password, userType, null, address);
+    }
+}

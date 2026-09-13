@@ -36,7 +36,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserResponse create(CreateUserRequest request) {
         validateEmailUniqueness(request.email());
-        User user = userFactory.createEntity(request);
+
+        com.restaurant.management.model.UserType userType = userTypeRepository.findById(request.idTipoUsuario())
+                .orElseThrow(() -> new UserTypeNotFoundException(request.idTipoUsuario()));
+
+        User user = userFactory.createEntity(request, userType);
         user.setPassword(passwordService.hash(request.password()));
         return UserResponse.from(repository.save(user));
     }

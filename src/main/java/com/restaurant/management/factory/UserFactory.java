@@ -28,11 +28,37 @@ public class UserFactory {
         return user;
     }
 
+    public User createEntity(CreateUserRequest request, com.restaurant.management.model.UserType userTypeEntity) {
+        User user = createInstance(userTypeEntity.getName());
+        user.setName(request.name());
+        user.setEmail(request.email());
+        user.setLogin(request.login());
+        user.setUserType(userTypeEntity);
+        user.setLastChange(LocalDateTime.now());
+
+        if (request.address() != null) {
+            user.setAddress(toAddress(request.address()));
+        }
+
+        return user;
+    }
+
     private User createInstance(UserType userType) {
         return switch (userType) {
             case RESTAURANT_OWNER -> new RestaurantOwner();
             case CLIENT -> new Client();
         };
+    }
+
+    private User createInstance(String userTypeName) {
+        String normalized = userTypeName == null ? "" : userTypeName.trim().toLowerCase();
+        if (normalized.contains("cliente") || normalized.contains("client")) {
+            return new Client();
+        }
+        if (normalized.contains("dono") || normalized.contains("restaurante") || normalized.contains("owner")) {
+            return new RestaurantOwner();
+        }
+        throw new IllegalArgumentException("Tipo de usuário inválido: " + userTypeName);
     }
 
     public Address toAddress(AddressRequest request) {
