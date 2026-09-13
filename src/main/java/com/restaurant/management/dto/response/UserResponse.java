@@ -13,6 +13,10 @@ public record UserResponse(
         String email,
         String login,
         String userType,
+        @JsonProperty("id_tipo_usuario")
+        Long idTipoUsuario,
+        @JsonProperty("descricao_tipo_usuario")
+        String descricaoTipoUsuario,
         LocalDateTime lastChange,
         AddressResponse address
 ) {
@@ -23,6 +27,8 @@ public record UserResponse(
                 user.getEmail(),
                 user.getLogin(),
                 user.getUserType() != null ? user.getUserType().getName() : user.getClass().getSimpleName(),
+                user.getUserType() != null ? user.getUserType().getId() : null,
+                user.getUserType() != null ? user.getUserType().getObservation() : null,
                 user.getLastChange(),
                 AddressResponse.from(user.getAddress())
         );
